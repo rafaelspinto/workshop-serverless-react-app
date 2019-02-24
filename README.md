@@ -34,6 +34,7 @@ For the backend tier we will be using:
 
 ### Data
 
+
 For the data tier we will be using:
 - [Docker](https://www.docker.com/get-started) - Runtime virtualization using containers.
 - [DynamoDB](https://aws.amazon.com/dynamodb/) - A fast and flexible NoSQL database service for any scale. 
@@ -42,35 +43,31 @@ For the data tier we will be using:
 
 ## Running Locally
 
-To run this project locally in development mode you need to clone the repository and start the 3 tiers independently (separate comand lines):
-
+To run this project locally in development mode you need to clone the repository and either use the [start.sh](start.sh) script or start the 3 tiers independently (using the following commands):
 
 ```
 git clone https://github.com/rafaelspinto/workshop-serverless-react-app
 ```
 
-#### Start Presentation tier
+#### Starting the Presentation tier
 ```
-cd presentation
-PORT=3001 npm start
-```
-
-#### Start Logic tier
-```
-cd logic
-sam local start-api
+cd presentation; npm start
 ```
 
-#### Start Data tier
+#### Starting the Logic tier
 ```
-docker run -p 8000:8000 amazon/dynamodb-local
+cd logic; sam local start-api --docker-network lambda-local
+```
+
+#### Starting the Data tier
+```
+docker run -d --rm --name dynamodb-local --network lambda-local -p 8000:8000 amazon/dynamodb-local
+cd data && npm run create-db
+```
+#### Stopping the Data tier
+
+```
+docker stop dynamodb-local
 ```
 
 Now you can change every tier and see the changes immediatly due to hot reloading.
-
-## 
-
-
-## Creating a new Serverless App
-
-[How to create a new serverless app](/create-a-new-serverless-app.md)
