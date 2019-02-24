@@ -4,7 +4,7 @@ function info() {
 	echo -e "\033[1;34m$1\033[0m" $2
 }
 function ok() {
-	echo -e "\033[1;32mDONE\033[0m" $2
+	echo -e "\033[1;32mDONE\033[0m"
 }
 
 if ! docker network inspect lambda-local 2>/dev/null 1>/dev/null; then
