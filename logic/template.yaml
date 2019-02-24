@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+    logic tier
+Globals:
+    Function:
+        Timeout: 20
+        Environment:
+            Variables:
+                DB_REGION: eu-central-1
+                DB_ENDPOINT: http://dynamodb-local:8000
+    Api:
+        # enable CORS; to make more specific, change the origin wildcard
+        # to a particular domain name, e.g. "'www.example.com'"
+        Cors:
+            AllowMethods: "'OPTIONS,GET,POST,PUT,DELETE'"
+            AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+            AllowOrigin: "'*'"
+
+Resources:
+    OptionsFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: handlers/
+            Handler: local.cors
+            Runtime: nodejs8.10
+            Events:
+                Options:
+                    Type: Api
+                    Properties:
+                        Path: /{cors+}
+                        Method: OPTIONS
+                        Auth:
+                            Authorizer: NONE
+    FormSubmitFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: handlers/
+            Handler: form.submit
+            Runtime: nodejs8.10
+            Policies: AmazonDynamoDBFullAccess
+            Events:
+                FormSubmit:
+                    Type: Api
+                    Properties:
+                        Path: /submitForm
+                        Method: post
+    GetContactsFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: handlers/
+            Handler: contacts.get
+            Runtime: nodejs8.10
+            Policies: AmazonDynamoDBFullAccess
+            Events:
+                GetContacts:
+                    Type: Api
+                    Properties:
+                        Path: /contacts
+                        Method: get
