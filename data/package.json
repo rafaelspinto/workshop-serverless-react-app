@@ -1,0 +1,11 @@
+{
+  "name": "data-tier",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create-db": "NODE_ENV=development node createContactsTable.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.409.0"
+  }
+}
