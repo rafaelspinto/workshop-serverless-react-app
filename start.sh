@@ -7,6 +7,16 @@ function ok() {
 	echo -e "\033[1;32mDONE\033[0m"
 }
 
+CREDS_FILE=~/.aws/credentials
+
+if [ ! -f $CREDS_FILE ]; then
+	info "INFO:" "Credentials file not found: $CREDS_FILE. Please run the following command:"
+	echo
+	echo "   aws configure"
+	echo
+	exit
+fi
+
 if ! docker network inspect lambda-local 2>/dev/null 1>/dev/null; then
 	info "Preparing docker network..."
 	docker network create lambda-local && ok;
