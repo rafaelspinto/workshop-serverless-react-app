@@ -46,7 +46,7 @@ export default class ContactForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="inputMessage" className="sr-only">Password</label>
+                    <label htmlFor="inputMessage" className="sr-only">Message</label>
                     <textarea type="textarea" name="message" className="form-control" placeholder="Message" required rows={10} onChange={this.handleInputChange} />
                 </div>
 

@@ -163,6 +163,10 @@ The tools used here support hot reloading, which means that everytime you change
     });
   ```
 
+### AWS SDK
+
+- Documentation for [AWS SDK](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/index.html)
+
 ### ReactJS
 
 [ReactJS](https://reactjs.org/)
