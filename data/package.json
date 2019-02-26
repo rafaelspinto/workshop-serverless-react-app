@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-db": "cross-env NODE_ENV=development node createContactsTable.js"
+    "create-local-db": "cross-env DB_ENDPOINT=http://localhost:8000 DB_REGION=eu-central-1 NODE_ENV=development node createContactsTable.js"
   },
   "dependencies": {
     "aws-sdk": "^2.409.0",

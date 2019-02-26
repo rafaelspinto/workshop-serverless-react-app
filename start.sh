@@ -41,7 +41,7 @@ if ! docker inspect dynamodb-local 2>/dev/null 1>/dev/null; then
 	info "Starting DynamoDB Local...."
 	docker run -d --rm --name dynamodb-local --network lambda-local -p 8000:8000 amazon/dynamodb-local 1>/dev/null && ok
 	info "Creating Tables...."
-	cd data && npm run create-db 1>/dev/null && ok
+	cd data && npm run create-local-db 1>/dev/null && ok
 fi
 cd ..
 echo

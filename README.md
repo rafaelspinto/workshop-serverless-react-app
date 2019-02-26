@@ -112,7 +112,7 @@ To run this project in development mode you need to:
     docker run -d --rm --name dynamodb-local --network lambda-local -p 8000:8000 amazon/dynamodb-local
     cd data 
     npm install # only required in the first time
-    npm run create-db
+    npm run create-local-db
     ```
 
   3. Stopping the Data tier
