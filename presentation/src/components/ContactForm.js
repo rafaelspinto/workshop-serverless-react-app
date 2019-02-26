@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Utils from '../utils/Utils';
+import React, { Component } from 'react'
+import APIService from '../utils/APIService'
 
 export default class ContactForm extends Component {
 
@@ -20,13 +19,7 @@ export default class ContactForm extends Component {
     }
 
     handleSubmit(event) {
-        const data = {
-            name: this.state.name,
-            email: this.state.email,
-            message: this.state.message
-        }
-        axios.post(Utils.apiUrl('/submitForm'), data)
-            .then(this.setState({ submitted: true }))
+        APIService.createContact(this.state.name, this.state.email, this.state.message).then(this.setState({ submitted: true }))
         event.preventDefault();
     }
 
@@ -34,7 +27,7 @@ export default class ContactForm extends Component {
         if (this.state.submitted) {
             return (
                 <div className="alert alert-success">
-                    Submitted
+                    Your contact has been submitted!
               </div>
             );
         }

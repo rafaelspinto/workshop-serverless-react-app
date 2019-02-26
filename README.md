@@ -183,14 +183,14 @@ class HelloMessage extends React.Component {
    - ```render()``` - defines how a Component shall be rendered.
    - ```componentWillMount()``` - perform actions before component is mounted (e.g.: fetch data)
    - ```componentWillUnmount()```  - perform actions before component unmounted (e.g.: clear timers)
-- It is configured to run locally at **Port 3001** 
+- It is configured to run locally at **Port 3001** | http://localhost:3001
 
 ### AWS Lambda
 
 [AWS Lambda](https://aws.amazon.com/lambda/)
 
 - Local usage is possible with the docker image [lambci/lambda:nodejs8.10](https://github.com/lambci/docker-lambda).
-- It is configured to run locally at **Port 3000** 
+- It is configured to run locally at **Port 3000** | http://localhost:3000
 
 ### AWS Serverless Application Model (SAM)
 
@@ -204,7 +204,7 @@ class HelloMessage extends React.Component {
 [DynamoDB](https://aws.amazon.com/dynamodb/)
 
 - Local usage is possible with the docker image [amazon/dynamodb-local](https://hub.docker.com/r/amazon/dynamodb-local/).
-- It is configured to run locally at **Port 8000**
+- It is configured to run locally at **Port 8000** | http://localhost:8000
 
 ### Cross-Origin Resource Sharing (CORS)
 

@@ -43,7 +43,7 @@ Resources:
                 FormSubmit:
                     Type: Api
                     Properties:
-                        Path: /submitForm
+                        Path: /contacts
                         Method: post
     GetContactsFunction:
         Type: AWS::Serverless::Function

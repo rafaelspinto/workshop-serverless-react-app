@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Utils from '../utils/Utils';
+import React, { Component } from 'react'
+import APIService from '../utils/APIService'
+import Utils from '../utils/Utils'
 
 export default class ContactList extends Component {
 
@@ -11,8 +11,8 @@ export default class ContactList extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get(Utils.apiUrl('/contacts'))
+    componentWillMount() {
+        APIService.getContacts()
             .then(res => this.setState({ contacts: res.data }))
     }
 
@@ -31,8 +31,8 @@ export default class ContactList extends Component {
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Message</th>
                     </tr>
                 </thead>
