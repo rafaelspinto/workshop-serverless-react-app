@@ -32,7 +32,8 @@ function saveContact(name, email, message, callback) {
         } else {
             callback(null, {
                 headers: headers,
-                statusCode: 200
+                statusCode: 200,
+                body: 'OK'
             })
         }
     });
