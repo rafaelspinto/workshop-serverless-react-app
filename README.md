@@ -1,8 +1,12 @@
 # Serverless React App Workshop
 
-This workshop is designed to help you start building [Serverless](https://martinfowler.com/articles/serverless.html) [React](https://reactjs.org/) Apps using the ```AWS``` services. The main goal is for you to have the full infrastructure running on your local setup to easily develop and test.
+This workshop is designed to help you start building [Serverless](https://martinfowler.com/articles/serverless.html) [React](https://reactjs.org/) Apps using the ```AWS``` services. You will have the following infrastructure running on your **local setup**:
 
 ![Architecture](architecture.png)
+
+The same setup in the **AWS** infrastructure looks like this:
+
+![Architecture](architecture_aws.png)
 
 For simplification purposes we will be creating a basic **Contact Us** application. The application will be implemented using a [3 Tier Architecture](https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture):
 - **Presentation** using [ReactJS](https://reactjs.org/)
