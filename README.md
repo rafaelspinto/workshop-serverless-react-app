@@ -2,7 +2,7 @@
 
 This workshop is designed to help you start building [Serverless](https://martinfowler.com/articles/serverless.html) [React](https://reactjs.org/) Apps using the ```AWS``` services. You will have the following infrastructure running on your **local setup**:
 
-![Architecture](architecture.png)
+![Architecture](architecture_local.png)
 
 The same setup in the **AWS** infrastructure looks like this:
 
