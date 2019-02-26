@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create-db": "NODE_ENV=development node createContactsTable.js"
+    "create-db": "cross-env NODE_ENV=development node createContactsTable.js"
   },
   "dependencies": {
-    "aws-sdk": "^2.409.0"
+    "aws-sdk": "^2.409.0",
+    "cross-env": "^5.2.0"
   }
 }
