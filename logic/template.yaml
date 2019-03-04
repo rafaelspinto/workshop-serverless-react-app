@@ -7,8 +7,10 @@ Globals:
         Timeout: 20
         Environment:
             Variables:
+                IS_LOCAL: false
                 DB_REGION: eu-central-1
                 DB_ENDPOINT: http://dynamodb-local:8000
+                LOCAL_TABLE_NAME: Contacts
     Api:
         # enable CORS; to make more specific, change the origin wildcard
         # to a particular domain name, e.g. "'www.example.com'"
@@ -46,8 +48,6 @@ Resources:
                     Properties:
                         Path: /{cors+}
                         Method: OPTIONS
-                        Auth:
-                            Authorizer: NONE
     FormSubmitFunction:
         Type: AWS::Serverless::Function
         Properties:

@@ -1,19 +1,24 @@
 const AWS = require('aws-sdk')
 const headers = require('./headers')
+var tableName = process.env.TABLE_NAME
 
-AWS.config.update({
-    region: process.env.DB_REGION,
-    endpoint: process.env.DB_ENDPOINT
-});
+// local environment
+if(process.env.IS_LOCAL == true) {
+    AWS.config.update({
+        region: process.env.DB_REGION,
+        endpoint: process.env.DB_ENDPOINT
+    });
+    tableName = process.env.LOCAL_TABLE_NAME
+}
 
 exports.get = (event, context, callback) => {
     return getAllContacts(callback)
 };
 
 function getAllContacts(callback) {
-    var ddb = new AWS.DynamoDB.DocumentClient();;
+    var ddb = new AWS.DynamoDB.DocumentClient()
     var params = {
-        TableName: "Contacts"
+        TableName: tableName
     };
 
     ddb.scan(params, function (err, data) {
