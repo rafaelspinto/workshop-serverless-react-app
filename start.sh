@@ -50,7 +50,7 @@ info "INFO:" "To start the application open 2 terminals and run the followings c
 echo
 echo "     cd presentation; npm start"
 echo
-echo "     cd logic; sam local start-api --docker-network lambda-local"
+echo "     cd logic; IS_LOCAL=true sam local start-api --docker-network lambda-local"
 echo
 info "INFO:" "To stop the local DynamoDB run the following command:"
 echo

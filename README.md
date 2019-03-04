@@ -29,6 +29,7 @@ This tier is also known as Persistency.
 
 - [Pre-requisites](#pre-requisites)
 - [Running locally](#running-locally)
+- [Deploying](#deploying)
 - [Essentials](#essentials)
 
 ## Pre-requisites
@@ -108,7 +109,7 @@ To run this project in development mode you need to:
     ```bash
     cd logic
     cd handlers; npm install; cd .. # only required in the first time
-    sam local start-api --docker-network lambda-local
+    IS_LOCAL=true sam local start-api --docker-network lambda-local
     ```
 
   - Starting the Data tier
@@ -121,9 +122,88 @@ To run this project in development mode you need to:
 
   3. Stopping the Data tier
 
-      ```
+      ```bash
       docker stop dynamodb-local
       ```
+
+## Deploying
+
+### Logic & Data
+
+Firstly, we need a `S3 bucket` where we can upload our Lambda functions packaged as ZIP before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:
+
+```bash
+aws s3 mb s3://workshop-serverless-react-app-logic
+```
+
+Next, run the following command to package our Lambda function to S3:
+
+```bash
+sam package \
+    --template-file template.yaml \
+    --output-template-file packaged.yaml \
+    --s3-bucket workshop-serverless-react-app-logic
+```
+
+Next, the following command will create a Cloudformation Stack and deploy your SAM resources.
+
+```bash
+sam deploy \
+    --template-file packaged.yaml \
+    --stack-name logic \
+    --capabilities CAPABILITY_IAM
+```
+
+
+### Presentation
+
+Firstly, we need a `S3 bucket` where we can upload our built react app before we deploy anything - If you don't have a S3 bucket to store code artifacts then this is a good time to create one:
+
+  ```bash
+  aws s3 mb s3://workshop-serverless-react-app
+  ```
+Next, we need to [configure the bucket for website hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/HowDoIWebsiteConfiguration.html). In order to do that, we have to:
+  1. Enable Static Website Hosting
+  2. Setup Permissions, by navigating to: ```Permissions > Bucket Policy``` and entering a policy like the following:
+
+  ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowPublicReadAccess",
+          "Effect": "Allow",
+          "Principal": "*",
+          "Action": [
+            "s3:GetObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::workshop-serverless-react-app/*"
+          ]
+        }
+      ]
+    }
+  ```
+
+Next, create a `.env` file in the presentation folder with the API URL of your lambda endpoint:
+
+```bash
+REACT_APP_API_URL=<TODO>
+```
+
+Next, run the following command to build the app:
+
+  ```bash
+    npm run build
+  ```
+
+Next, run the following command to upload the build to the s3 bucket:
+
+  ```bash
+    aws s3 sync build/ s3://workshop-serverless-react-app
+  ```
+
+Then you can test it live using the Static website hosting endpoint url.
 
 ## Essentials
 
