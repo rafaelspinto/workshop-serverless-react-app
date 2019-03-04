@@ -18,6 +18,22 @@ Globals:
             AllowOrigin: "'*'"
 
 Resources:
+    ContactsTable:
+        Type: 'AWS::DynamoDB::Table'
+        Properties:
+            AttributeDefinitions:
+                - AttributeName: email
+                  AttributeType: S
+                - AttributeName: timestamp
+                  AttributeType: N
+            KeySchema:
+                - AttributeName: email
+                  KeyType: HASH
+                - AttributeName: timestamp
+                  KeyType: RANGE
+            ProvisionedThroughput:
+                ReadCapacityUnits: 5
+                WriteCapacityUnits: 5
     OptionsFunction:
         Type: AWS::Serverless::Function
         Properties:
@@ -39,6 +55,9 @@ Resources:
             Handler: form.submit
             Runtime: nodejs8.10
             Policies: AmazonDynamoDBFullAccess
+            Environment:
+                Variables:
+                    TABLE_NAME: !Ref ContactsTable
             Events:
                 FormSubmit:
                     Type: Api
@@ -52,6 +71,9 @@ Resources:
             Handler: contacts.get
             Runtime: nodejs8.10
             Policies: AmazonDynamoDBFullAccess
+            Environment:
+                Variables:
+                    TABLE_NAME: !Ref ContactsTable
             Events:
                 GetContacts:
                     Type: Api
